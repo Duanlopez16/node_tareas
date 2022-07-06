@@ -6,6 +6,7 @@ const main = async() => {
     let opt = '';
     const tareas = new Tareas();
     do {
+        //esta opcion imprime el menu
         opt = await inquirer_menu();
 
         switch (opt) {
@@ -14,7 +15,7 @@ const main = async() => {
                 tareas.crear_tarea(desc);
                 break;
             case '2':
-                console.log(tareas._listado);
+                console.log(tareas.listado_array);
                 break;
         }
 
