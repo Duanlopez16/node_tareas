@@ -1,4 +1,5 @@
 import colors from 'colors';
+import { guardar } from './helpers/archivo.js';
 import { inquirer_menu, inquirer_pausa, leer_input } from './helpers/inquirer.js';
 import { Tareas } from './models/Tareas.js';
 
@@ -18,7 +19,8 @@ const main = async() => {
                 console.log(tareas.listado_array);
                 break;
         }
-
+        // esata parte se encarga de guardar crear un archivo con las tareas
+        guardar(tareas.listado_array);
         await inquirer_pausa();
 
     } while (opt != '0');
