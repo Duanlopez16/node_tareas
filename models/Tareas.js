@@ -81,6 +81,23 @@ class Tareas {
             delete this._listado[id];
         }
     }
+
+
+    toggle_tareas(ids = []) {
+        ids.forEach((id) => {
+            const tarea = this._listado[id];
+
+            if (!tarea.completado_en) {
+                tarea.completado_en = new Date().toISOString();
+            }
+        });
+
+        this.listado_array.forEach(tarea => {
+            if (!ids.includes(tarea.id)) {
+                this._listado[tarea.id].completado_en = null;
+            }
+        });
+    }
 }
 
 export { Tareas };

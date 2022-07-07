@@ -1,6 +1,13 @@
 import colors from 'colors';
 import { guardar, leer_archivo } from './helpers/archivo.js';
-import { connfirmar, inquirer_menu, inquirer_pausa, leer_input, listado_tareas_borrar } from './helpers/inquirer.js';
+import {
+    confirmar,
+    inquirer_menu,
+    inquirer_pausa,
+    leer_input,
+    listado_tareas_borrar,
+    listado_tareas_check_box
+} from './helpers/inquirer.js';
 import { Tareas } from './models/Tareas.js';
 
 const main = async() => {
@@ -31,6 +38,12 @@ const main = async() => {
 
             case '4':
                 tareas.tareas_pendientes();
+                break;
+
+            case '5':
+                const ids = await listado_tareas_check_box(tareas.listado_array);
+
+                tareas.toggle_tareas(ids);
                 break;
 
             case '6':

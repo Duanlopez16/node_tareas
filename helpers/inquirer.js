@@ -112,10 +112,33 @@ const confirmar = async(message) => {
     const { ok } = await inquirer.prompt(pregunta);
     return ok;
 }
+
+const listado_tareas_check_box = async(tareas = []) => {
+    const choices = tareas.map((tarea, key) => {
+        const name = `${key + 1}. ${tarea.desc}`;
+        return {
+            value: tarea.id,
+            name,
+            checked: (tarea.completado_en) ? true : false
+        }
+    });
+
+    const pregunta = [{
+        type: 'checkbox',
+        name: 'ids',
+        message: 'completar tareas',
+        choices
+    }];
+    const { ids } = await inquirer.prompt(pregunta);
+    return ids;
+
+}
+
 export {
     inquirer_menu,
     inquirer_pausa,
     leer_input,
     listado_tareas_borrar,
-    confirmar
+    confirmar,
+    listado_tareas_check_box
 }
