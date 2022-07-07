@@ -24,11 +24,11 @@ const menu_opts = [{
         },
         {
             value: '5',
-            name: `${'5.'.green} completar tareas`
+            name: `${'5.'.green} Completar tareas`
         },
         {
             value: '6',
-            name: `${'5.'.green} Borrar Tarea`
+            name: `${'6.'.green} Borrar Tarea`
         },
         {
             value: '0',
@@ -74,8 +74,48 @@ const leer_input = async(message) => {
     return desc;
 }
 
+const listado_tareas_borrar = async(tareas = []) => {
+    if (tareas.length !== 0) {
+        const choices = tareas.map((tarea, key) => {
+            const name = `${key + 1}. ${tarea.desc}`;
+            return {
+                value: tarea.id,
+                name
+            }
+        });
+
+        choices.unshift({
+            value: '0.'.green,
+            name: 'Cancelar'
+        });
+        const preguntas = [{
+            type: 'list',
+            name: 'id',
+            message: 'borrar',
+            choices
+        }];
+
+        const { id } = await inquirer.prompt(preguntas);
+        return id;
+    } else {
+        return null;
+    }
+}
+
+const confirmar = async(message) => {
+    const pregunta = [{
+        type: 'confirm',
+        name: 'ok',
+        message
+    }];
+
+    const { ok } = await inquirer.prompt(pregunta);
+    return ok;
+}
 export {
     inquirer_menu,
     inquirer_pausa,
-    leer_input
+    leer_input,
+    listado_tareas_borrar,
+    confirmar
 }
